@@ -381,7 +381,7 @@ define Device/meraki_mx65
   $(call Device/meraki_mx6x)
   DEVICE_MODEL := MX65
   DEVICE_DTS := bcm958625-meraki-mx65
-  DEVICE_PACKAGES += kmod-switch-qca8k
+  DEVICE_PACKAGES += kmod-hwmon-bcm59111 kmod-switch-qca8k
 endef
 TARGET_DEVICES += meraki_mx65
 
