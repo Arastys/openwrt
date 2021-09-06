@@ -22,6 +22,14 @@ bcm53xx_setup_interfaces()
 	meraki,mr32)
 		ucidef_set_interface_lan "poe" "dhcp"
 		;;
+	meraki,mx64|\
+	meraki,mx64-a0)
+		ucidef_set_interfaces_lan_wan "lan1 lan2 lan3 lan4" "wan"
+		;;
+	meraki,mx65)
+		ucidef_set_interfaces_lan_wan \
+			"lan3 lan4 lan5 lan6 lan7 lan8 lan9 lan10 lan11 lan12" "wan1 wan2"
+		;;
 	phicomm,k3)
 		ucidef_set_interfaces_lan_wan "lan1 lan2 lan3" "wan"
 		;;
