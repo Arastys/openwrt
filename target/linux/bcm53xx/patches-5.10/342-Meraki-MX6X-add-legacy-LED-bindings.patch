@@ -1,0 +1,207 @@
+From: Matthew Hagan <mnhagan88@gmail.com>
+Date: Wed, 17 Mar 2021 10:47:39 +0000
+Subject: bcm-nsp: revert MX64/MX65 LED definitions
+
+Revert to the legacy label bindings and add indicator LEDs to the MX64/
+MX65 device trees.
+
+Signed-off-by: Matthew Hagan <mnhagan88@gmail.com>
+
+--- a/arch/arm/boot/dts/bcm958625-meraki-alamo.dtsi
++++ b/arch/arm/boot/dts/bcm958625-meraki-alamo.dtsi
+@@ -24,49 +24,32 @@
+ 		compatible = "gpio-leds";
+ 
+ 		led-0 {
+-			/* green:wan1-left */
+-			function = LED_FUNCTION_ACTIVITY;
+-			function-enumerator = <0>;
+-			color = <LED_COLOR_ID_GREEN>;
++			label = "green:wan1-left";
+ 			gpios = <&gpioa 25 GPIO_ACTIVE_LOW>;
+ 		};
+ 
+ 		led-1 {
+-			/* green:wan1-right */
+-			function = LED_FUNCTION_ACTIVITY;
+-			function-enumerator = <1>;
+-			color = <LED_COLOR_ID_GREEN>;
++			label = "green:wan1-right";
+ 			gpios = <&gpioa 24 GPIO_ACTIVE_LOW>;
+ 		};
+ 
+ 		led-2 {
+-			/* green:wan2-left */
+-			function = LED_FUNCTION_ACTIVITY;
+-			function-enumerator = <2>;
+-			color = <LED_COLOR_ID_GREEN>;
++			label = "green:wan2-left";
+ 			gpios = <&gpioa 27 GPIO_ACTIVE_LOW>;
+ 		};
+ 
+ 		led-3 {
+-			/* green:wan2-right */
+-			function = LED_FUNCTION_ACTIVITY;
+-			function-enumerator = <3>;
+-			color = <LED_COLOR_ID_GREEN>;
++			label = "green:wan2-right";
+ 			gpios = <&gpioa 26 GPIO_ACTIVE_LOW>;
+ 		};
+ 
+		led-4 {
+-			/* amber:power */
+-			function = LED_FUNCTION_POWER;
+-			color = <LED_COLOR_ID_AMBER>;
++			label = "amber:default";
+ 			gpios = <&gpioa 3 GPIO_ACTIVE_HIGH>;
+-			default-state = "on";
+ 		};
+ 
+ 		led-5 {
+-			/* white:status */
+-			function = LED_FUNCTION_STATUS;
+-			color = <LED_COLOR_ID_WHITE>;
++			label = "white:status";
+ 			gpios = <&gpioa 31 GPIO_ACTIVE_HIGH>;
+ 		};
+ 	};
+--- a/arch/arm/boot/dts/bcm958625-meraki-kingpin.dtsi
++++ b/arch/arm/boot/dts/bcm958625-meraki-kingpin.dtsi
+@@ -25,97 +25,62 @@
+ 		compatible = "gpio-leds";
+ 
+ 		led-0 {
+-			/* green:lan1-left */
+-			function = LED_FUNCTION_ACTIVITY;
+-			function-enumerator = <0>;
+-			color = <LED_COLOR_ID_GREEN>;
++			label = "green:lan1-left";
+ 			gpios = <&gpioa 19 GPIO_ACTIVE_LOW>;
+ 		};
+ 
+ 		led-1 {
+-			/* green:lan1-right */
+-			function = LED_FUNCTION_ACTIVITY;
+-			function-enumerator = <1>;
+-			color = <LED_COLOR_ID_GREEN>;
++			label = "green:lan1-right";
+ 			gpios = <&gpioa 18 GPIO_ACTIVE_LOW>;
+ 		};
+ 
+ 		led-2 {
+-			/* green:lan2-left */
+-			function = LED_FUNCTION_ACTIVITY;
+-			function-enumerator = <2>;
+-			color = <LED_COLOR_ID_GREEN>;
++			label = "green:lan2-left";
+ 			gpios = <&gpioa 24 GPIO_ACTIVE_LOW>;
+ 		};
+ 
+ 		led-3 {
+-			/* green:lan2-right */
+-			function = LED_FUNCTION_ACTIVITY;
+-			function-enumerator = <3>;
+-			color = <LED_COLOR_ID_GREEN>;
++			label = "green:lan2-right";
+ 			gpios = <&gpioa 20 GPIO_ACTIVE_LOW>;
+ 		};
+ 
+ 		led-4 {
+-			/* green:lan3-left */
+-			function = LED_FUNCTION_ACTIVITY;
+-			function-enumerator = <4>;
+-			color = <LED_COLOR_ID_GREEN>;
++			label = "green:lan3-left";
+ 			gpios = <&gpioa 26 GPIO_ACTIVE_LOW>;
+ 		};
+ 
+ 		led-5 {
+-			/* green:lan3-right */
+-			function = LED_FUNCTION_ACTIVITY;
+-			function-enumerator = <5>;
+-			color = <LED_COLOR_ID_GREEN>;
++			label = "green:lan3-right";
+ 			gpios = <&gpioa 25 GPIO_ACTIVE_LOW>;
+ 		};
+ 
+ 		led-6 {
+-			/* green:lan4-left */
+-			function = LED_FUNCTION_ACTIVITY;
+-			function-enumerator = <6>;
+-			color = <LED_COLOR_ID_GREEN>;
++			label = "green:lan4-left";
+ 			gpios = <&gpioa 28 GPIO_ACTIVE_LOW>;
+ 		};
+ 
+ 		led-7 {
+-			/* green:lan4-right */
+-			function = LED_FUNCTION_ACTIVITY;
+-			function-enumerator = <7>;
+-			color = <LED_COLOR_ID_GREEN>;
++			label = "green:lan4-right";
+ 			gpios = <&gpioa 27 GPIO_ACTIVE_LOW>;
+ 		};
+ 
+ 		led-8 {
+-			/* green:wan-left */
+-			function = LED_FUNCTION_ACTIVITY;
+-			function-enumerator = <8>;
+-			color = <LED_COLOR_ID_GREEN>;
++			label = "green:wan-left";
+ 			gpios = <&gpioa 30 GPIO_ACTIVE_LOW>;
+ 		};
+ 
+ 		led-9 {
+-			/* green:wan-right */
+-			function = LED_FUNCTION_ACTIVITY;
+-			function-enumerator = <9>;
+-			color = <LED_COLOR_ID_GREEN>;
++			label = "green:wan-right";
+ 			gpios = <&gpioa 29 GPIO_ACTIVE_LOW>;
+ 		};
+ 
+		led-a {
+-			/* amber:power */
+-			function = LED_FUNCTION_POWER;
+-			color = <LED_COLOR_ID_AMBER>;
++			label = "amber:default";
+ 			gpios = <&gpioa 0 GPIO_ACTIVE_LOW>;
+-			default-state = "on";
+ 		};
+ 
+ 		led-b {
+-			/* white:status */
+-			function = LED_FUNCTION_STATUS;
+-			color = <LED_COLOR_ID_WHITE>;
++			label = "white:status";
+ 			gpios = <&gpioa 31 GPIO_ACTIVE_HIGH>;
+ 		};
+ 	};
+--- a/arch/arm/boot/dts/bcm958625-meraki-mx6x-common.dtsi
++++ b/arch/arm/boot/dts/bcm958625-meraki-mx6x-common.dtsi
+@@ -15,22 +15,19 @@
+ 		compatible = "pwm-leds";
+ 
+ 		led-1 {
+-			function = LED_FUNCTION_INDICATOR;
+-			color = <LED_COLOR_ID_RED>;
++			label = "red:user";
+ 			pwms = <&pwm 1 50000>;
+ 			max-brightness = <255>;
+ 		};
+ 
+		led-2 {
+-			function = LED_FUNCTION_INDICATOR;
+-			color = <LED_COLOR_ID_GREEN>;
++			label = "green:power";
+ 			pwms = <&pwm 2 50000>;
+ 			max-brightness = <255>;
+ 		};
+ 
+ 		led-3 {
+-			function = LED_FUNCTION_INDICATOR;
+-			color = <LED_COLOR_ID_BLUE>;
++			label = "blue:user";
+ 			pwms = <&pwm 3 50000>;
+ 			max-brightness = <255>;
+ 		};

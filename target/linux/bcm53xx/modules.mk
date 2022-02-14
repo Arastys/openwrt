@@ -50,3 +50,35 @@ define KernelPackage/i2c-bcm-iproc/description
 endef
 
 $(eval $(call KernelPackage,i2c-bcm-iproc))
+
+define KernelPackage/switch-qca8k
+  SUBMENU:=$(NETWORK_DEVICES_MENU)
+  TITLE:=Qualcomm QCA8337 DSA switch driver
+  FILES:=$(LINUX_DIR)/drivers/net/dsa/qca8k.ko
+  KCONFIG:=CONFIG_NET_DSA_QCA8K \
+	CONFIG_NET_DSA_TAG_QCA=y \
+	CONFIG_REGMAP=y
+  DEPENDS:=@TARGET_bcm53xx
+  AUTOLOAD:=$(call AutoLoad,50,qca8k)
+endef
+
+define KernelPackage/qca8k/description
+  Kernel module for Qualcomm QCA8337 DSA driver
+endef
+
+$(eval $(call KernelPackage,switch-qca8k))
+
+define KernelPackage/hwmon-bcm59111
+  TITLE:=Broadcom BCM59111 PSE support
+  KCONFIG:=CONFIG_SENSORS_BCM59111
+  DEPENDS:=@TARGET_bcm53xx +kmod-hwmon-core +kmod-i2c-core
+  SUBMENU:=$(HWMON_MENU)
+  FILES:=$(LINUX_DIR)/drivers/hwmon/bcm_poe.ko
+  AUTOLOAD:=$(call AutoLoad,60,bcm_poe,1)
+endef
+
+define KernelPackage/hwmon-bcm59111/description
+  Kernel module for the Broadcom BCM59111 PSE controller.
+endef
+
+$(eval $(call KernelPackage,hwmon-bcm59111))

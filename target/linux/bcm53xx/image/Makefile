@@ -47,6 +47,14 @@ define Build/buffalo-wzr-header
 	mv $@.new $@
 endef
 
+define Build/MerakiNAND-old
+	-$(STAGING_DIR_HOST)/bin/mkmerakifw-old \
+		-B mx64 -s \
+		-i $@ \
+		-o $@.new
+	mv $@.new $@
+endef
+
 # TRX with only one (kernel) partition
 define Build/trx
 	$(STAGING_DIR_HOST)/bin/trx \
@@ -341,6 +349,41 @@ define Device/meraki_mr32
   DEVICE_FDT_NUM := 2
 endef
 TARGET_DEVICES += meraki_mr32
+
+define Device/meraki_mx6x
+  DEVICE_PACKAGES := -oseama -otrx kmod-i2c-bcm-iproc kmod-i2c-gpio \
+	kmod-eeprom-at24 kmod-leds-pwm kmod-usb-ehci kmod-usb-ohci kmod-usb2 \
+	kmod-ledtrig-default-on kmod-ledtrig-netdev
+  DEVICE_VENDOR := Cisco Meraki
+  KERNEL := kernel-bin | append-dtb | pad-to $$(BLOCKSIZE) | MerakiNAND-old
+  KERNEL_SIZE := 3072k
+  KERNEL_INITRAMFS := kernel-bin | append-dtb | pad-to $$(BLOCKSIZE) | MerakiNAND-old
+  KERNEL_INITRAMFS_SUFFIX := .bin
+  IMAGES := sysupgrade.bin
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+
+define Device/meraki_mx64
+  $(call Device/meraki_mx6x)
+  DEVICE_MODEL := MX64
+  DEVICE_DTS := bcm958625-meraki-mx64
+endef
+TARGET_DEVICES += meraki_mx64
+
+define Device/meraki_mx64_a0
+  $(call Device/meraki_mx64)
+  DEVICE_VARIANT := A0
+  DEVICE_DTS := bcm958625-meraki-mx64-a0
+endef
+TARGET_DEVICES += meraki_mx64_a0
+
+define Device/meraki_mx65
+  $(call Device/meraki_mx6x)
+  DEVICE_MODEL := MX65
+  DEVICE_DTS := bcm958625-meraki-mx65
+  DEVICE_PACKAGES += kmod-hwmon-bcm59111 kmod-switch-qca8k
+endef
+TARGET_DEVICES += meraki_mx65
 
 define Device/netgear
   DEVICE_VENDOR := NETGEAR
